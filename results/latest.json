@@ -1,0 +1,178 @@
+{
+  "generated_at": "2026-10-21T23:23:49Z",
+  "runs": [
+    {
+      "pair": "haystack-qdrant",
+      "a": "t-gh-deepset-ai-haystack",
+      "b": "t-gh-qdrant-qdrant",
+      "type": "sdk",
+      "what": "Haystack writes documents to a Qdrant document store and reads them back",
+      "started_at": "2026-10-21T23:22:55+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "wrote 1 document, counted it back",
+      "ok": true,
+      "versions": {
+        "haystack-ai": "3.4.1",
+        "qdrant-haystack": "13.0.0"
+      },
+      "seconds": 14.5,
+      "finished_at": "2026-10-21T23:23:09+00:00"
+    },
+    {
+      "pair": "langchain-ollama",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-ollama-ollama",
+      "type": "sdk",
+      "what": "LangChain's ChatOllama gets an answer from a local Ollama model",
+      "started_at": "2026-10-21T23:22:57+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "replied: Ready. Ready to assist you with any questions or",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-ollama": "1.1.0"
+      },
+      "seconds": 10.5,
+      "finished_at": "2026-10-21T23:23:08+00:00"
+    },
+    {
+      "pair": "langchain-pgvector",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-pgvector",
+      "type": "sdk",
+      "what": "LangChain's PGVector store writes and searches vectors in Postgres",
+      "started_at": "2026-10-21T23:22:56+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "wrote 2 vectors with PGVector, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-postgres": "0.0.19",
+        "psycopg": "3.3.6"
+      },
+      "seconds": 14.5,
+      "finished_at": "2026-10-21T23:23:10+00:00"
+    },
+    {
+      "pair": "langchain-qdrant",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-qdrant-qdrant",
+      "type": "sdk",
+      "what": "LangChain writes vectors to Qdrant and searches them back",
+      "started_at": "2026-10-21T23:22:52+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "wrote 2 vectors, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-qdrant": "1.1.0",
+        "qdrant-client": "1.19.1"
+      },
+      "seconds": 15.0,
+      "finished_at": "2026-10-21T23:23:07+00:00"
+    },
+    {
+      "pair": "litellm-ollama",
+      "a": "t-gh-berriai-litellm",
+      "b": "t-gh-ollama-ollama",
+      "type": "rest-api",
+      "what": "LiteLLM routes a chat completion to a local Ollama model",
+      "started_at": "2026-10-21T23:23:20+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "replied: ready.",
+      "ok": true,
+      "versions": {
+        "litellm": "1.106.2"
+      },
+      "seconds": 18.2,
+      "finished_at": "2026-10-21T23:23:38+00:00"
+    },
+    {
+      "pair": "llamaindex-chroma",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-chroma-core-chroma",
+      "type": "sdk",
+      "what": "LlamaIndex indexes documents in Chroma and retrieves them",
+      "started_at": "2026-10-21T23:23:08+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "indexed 1 document in Chroma, retrieved it",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-vector-stores-chroma": "0.6.0",
+        "chromadb": "1.5.9"
+      },
+      "seconds": 23.5,
+      "finished_at": "2026-10-21T23:23:32+00:00"
+    },
+    {
+      "pair": "llamaindex-ollama",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-ollama-ollama",
+      "type": "sdk",
+      "what": "LlamaIndex's Ollama LLM completes a prompt on a local Ollama model",
+      "started_at": "2026-10-21T23:23:01+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "replied: Ready. Ready to assist you with any questions or tasks you m",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-llms-ollama": "0.11.0"
+      },
+      "seconds": 22.8,
+      "finished_at": "2026-10-21T23:23:24+00:00"
+    },
+    {
+      "pair": "llamaindex-qdrant",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-qdrant-qdrant",
+      "type": "sdk",
+      "what": "LlamaIndex indexes documents in Qdrant and retrieves them",
+      "started_at": "2026-10-21T23:22:53+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "indexed 1 document, retrieved it",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-vector-stores-qdrant": "0.10.4",
+        "qdrant-client": "1.19.1"
+      },
+      "seconds": 23.6,
+      "finished_at": "2026-10-21T23:23:16+00:00"
+    },
+    {
+      "pair": "psycopg-pgvector",
+      "a": "t-gh-psycopg-psycopg",
+      "b": "t-pgvector",
+      "type": "native-connector",
+      "what": "psycopg stores a pgvector embedding in Postgres and finds its nearest neighbour",
+      "started_at": "2026-10-21T23:22:55+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "note": "pgvector 0.8.7: nearest-neighbour query returned the right row",
+      "ok": true,
+      "versions": {
+        "psycopg": "3.3.6"
+      },
+      "seconds": 3.3,
+      "finished_at": "2026-10-21T23:22:58+00:00"
+    }
+  ]
+}
