@@ -1,24 +1,252 @@
 {
-  "generated_at": "2026-10-21T23:23:49Z",
+  "generated_at": "2026-10-21T23:46:37Z",
   "runs": [
+    {
+      "pair": "crewai-ollama",
+      "a": "t-gh-crewaiinc-crewai",
+      "b": "t-gh-ollama-ollama",
+      "type": "sdk",
+      "what": "A one-agent CrewAI crew completes a task on a local Ollama model",
+      "started_at": "2026-10-21T23:43:45+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "crew replied: ready",
+      "ok": true,
+      "versions": {
+        "crewai": "1.15.28"
+      },
+      "seconds": 38.7,
+      "finished_at": "2026-10-21T23:44:24+00:00"
+    },
+    {
+      "pair": "haystack-chroma",
+      "a": "t-gh-deepset-ai-haystack",
+      "b": "t-gh-chroma-core-chroma",
+      "type": "sdk",
+      "what": "Haystack writes documents to a Chroma document store and counts them back",
+      "started_at": "2026-10-21T23:44:04+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "wrote 1 document to Chroma, counted it back",
+      "ok": true,
+      "versions": {
+        "haystack-ai": "3.4.1",
+        "chroma-haystack": "5.0.0"
+      },
+      "seconds": 25.3,
+      "finished_at": "2026-10-21T23:44:29+00:00"
+    },
+    {
+      "pair": "haystack-ollama",
+      "a": "t-gh-deepset-ai-haystack",
+      "b": "t-gh-ollama-ollama",
+      "type": "sdk",
+      "what": "Haystack's OllamaGenerator answers a prompt",
+      "started_at": "2026-10-21T23:43:48+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "ok": false,
+      "error": "ImportError: cannot import name 'OllamaGenerator' from 'haystack_integrations.components.generators.ollama' (/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/haystack_integrations/components/generators/ollama/__init__.py)",
+      "versions": {
+        "haystack-ai": "3.4.1",
+        "ollama-haystack": "7.0.2"
+      },
+      "seconds": 14.6,
+      "finished_at": "2026-10-21T23:44:02+00:00"
+    },
     {
       "pair": "haystack-qdrant",
       "a": "t-gh-deepset-ai-haystack",
       "b": "t-gh-qdrant-qdrant",
       "type": "sdk",
       "what": "Haystack writes documents to a Qdrant document store and reads them back",
-      "started_at": "2026-10-21T23:22:55+00:00",
+      "started_at": "2026-10-21T23:43:36+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
       "note": "wrote 1 document, counted it back",
       "ok": true,
       "versions": {
         "haystack-ai": "3.4.1",
         "qdrant-haystack": "13.0.0"
       },
-      "seconds": 14.5,
-      "finished_at": "2026-10-21T23:23:09+00:00"
+      "seconds": 16.1,
+      "finished_at": "2026-10-21T23:43:52+00:00"
+    },
+    {
+      "pair": "instructor-ollama",
+      "a": "t-gh-567-labs-instructor",
+      "b": "t-gh-ollama-ollama",
+      "type": "rest-api",
+      "what": "Instructor gets a validated structured object from a local Ollama model",
+      "started_at": "2026-10-21T23:46:14+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "structured reply: City(name='Paris')",
+      "ok": true,
+      "versions": {
+        "instructor": "1.17.0",
+        "openai": "3.3.0"
+      },
+      "seconds": 11.4,
+      "finished_at": "2026-10-21T23:46:26+00:00"
+    },
+    {
+      "pair": "keras-pytorch",
+      "a": "t-gh-keras-team-keras",
+      "b": "t-gh-pytorch-pytorch",
+      "type": "native-connector",
+      "what": "Keras trains a small model on its PyTorch backend",
+      "started_at": "2026-10-21T23:44:58+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "trained 2 epochs on the torch backend",
+      "ok": true,
+      "versions": {
+        "keras": "3.15.1",
+        "torch": "2.14.1+cpu",
+        "torchvision": "0.29.1+cpu"
+      },
+      "seconds": 37.4,
+      "finished_at": "2026-10-21T23:45:35+00:00"
+    },
+    {
+      "pair": "keras-tensorflow",
+      "a": "t-gh-keras-team-keras",
+      "b": "t-gh-tensorflow-tensorflow",
+      "type": "native-connector",
+      "what": "Keras trains a small model on its TensorFlow backend",
+      "started_at": "2026-10-21T23:45:51+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "trained 2 epochs on the tensorflow backend",
+      "ok": true,
+      "versions": {
+        "tensorflow": "2.21.0"
+      },
+      "seconds": 34.6,
+      "finished_at": "2026-10-21T23:46:25+00:00"
+    },
+    {
+      "pair": "langchain-chroma",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-chroma-core-chroma",
+      "type": "sdk",
+      "what": "LangChain writes vectors to Chroma and searches them back",
+      "started_at": "2026-10-21T23:45:38+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "wrote 2 vectors to Chroma, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-chroma": "1.1.0"
+      },
+      "seconds": 33.1,
+      "finished_at": "2026-10-21T23:46:11+00:00"
+    },
+    {
+      "pair": "langchain-docling",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-docling-project-docling",
+      "type": "sdk",
+      "what": "LangChain's DoclingLoader converts a document into LangChain documents",
+      "started_at": "2026-10-21T23:45:09+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "ok": false,
+      "error": "ImportError: The 'beautifulsoup4' package is required to process HTML files. Install it with `pip install 'docling-slim[format-html]'`.",
+      "versions": {
+        "langchain-docling": "3.0.0"
+      },
+      "seconds": 45.1,
+      "finished_at": "2026-10-21T23:45:55+00:00"
+    },
+    {
+      "pair": "langchain-lancedb",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-lancedb-lancedb",
+      "type": "sdk",
+      "what": "LangChain writes vectors to LanceDB and searches them back",
+      "started_at": "2026-10-21T23:43:40+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "wrote 2 vectors to LanceDB, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-community": "0.4.2",
+        "lancedb": "0.40.0"
+      },
+      "seconds": 22.4,
+      "finished_at": "2026-10-21T23:44:02+00:00"
+    },
+    {
+      "pair": "langchain-litellm",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-berriai-litellm",
+      "type": "sdk",
+      "what": "LangChain's ChatLiteLLM routes a prompt through LiteLLM to a local model",
+      "started_at": "2026-10-21T23:45:20+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: ready",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-litellm": "0.11.1"
+      },
+      "seconds": 31.8,
+      "finished_at": "2026-10-21T23:45:52+00:00"
+    },
+    {
+      "pair": "langchain-mcp",
+      "a": "t-gh-langchain-ai-langchain-mcp-adapters",
+      "b": "t-gh-modelcontextprotocol-python-sdk",
+      "type": "mcp-server",
+      "what": "LangChain's MCP adapters load and call a tool from an MCP server built with the official Python SDK",
+      "started_at": "2026-10-21T23:44:58+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "LangChain loaded and called a tool from an MCP server (2+3=5)",
+      "ok": true,
+      "versions": {
+        "langchain-mcp-adapters": "0.3.2",
+        "mcp": "1.30.0"
+      },
+      "seconds": 15.4,
+      "finished_at": "2026-10-21T23:45:13+00:00"
+    },
+    {
+      "pair": "langchain-milvus",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-milvus-io-milvus",
+      "type": "sdk",
+      "what": "LangChain writes vectors to Milvus (Lite) and searches them back",
+      "started_at": "2026-10-21T23:45:33+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "wrote 2 vectors to Milvus Lite, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-milvus": "0.4.0",
+        "pymilvus": "3.0.2"
+      },
+      "seconds": 18.0,
+      "finished_at": "2026-10-21T23:45:52+00:00"
     },
     {
       "pair": "langchain-ollama",
@@ -26,18 +254,18 @@
       "b": "t-gh-ollama-ollama",
       "type": "sdk",
       "what": "LangChain's ChatOllama gets an answer from a local Ollama model",
-      "started_at": "2026-10-21T23:22:57+00:00",
+      "started_at": "2026-10-21T23:43:46+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
-      "note": "replied: Ready. Ready to assist you with any questions or",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: Ready. Ready to assist you further.",
       "ok": true,
       "versions": {
         "langchain-core": "1.6.13",
         "langchain-ollama": "1.1.0"
       },
-      "seconds": 10.5,
-      "finished_at": "2026-10-21T23:23:08+00:00"
+      "seconds": 8.6,
+      "finished_at": "2026-10-21T23:43:55+00:00"
     },
     {
       "pair": "langchain-pgvector",
@@ -45,10 +273,10 @@
       "b": "t-pgvector",
       "type": "sdk",
       "what": "LangChain's PGVector store writes and searches vectors in Postgres",
-      "started_at": "2026-10-21T23:22:56+00:00",
+      "started_at": "2026-10-21T23:43:58+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
       "note": "wrote 2 vectors with PGVector, found the right one",
       "ok": true,
       "versions": {
@@ -56,8 +284,8 @@
         "langchain-postgres": "0.0.19",
         "psycopg": "3.3.6"
       },
-      "seconds": 14.5,
-      "finished_at": "2026-10-21T23:23:10+00:00"
+      "seconds": 9.8,
+      "finished_at": "2026-10-21T23:44:07+00:00"
     },
     {
       "pair": "langchain-qdrant",
@@ -65,10 +293,10 @@
       "b": "t-gh-qdrant-qdrant",
       "type": "sdk",
       "what": "LangChain writes vectors to Qdrant and searches them back",
-      "started_at": "2026-10-21T23:22:52+00:00",
+      "started_at": "2026-10-21T23:43:41+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
       "note": "wrote 2 vectors, found the right one",
       "ok": true,
       "versions": {
@@ -76,8 +304,67 @@
         "langchain-qdrant": "1.1.0",
         "qdrant-client": "1.19.1"
       },
-      "seconds": 15.0,
-      "finished_at": "2026-10-21T23:23:07+00:00"
+      "seconds": 14.0,
+      "finished_at": "2026-10-21T23:43:55+00:00"
+    },
+    {
+      "pair": "langchain-redis",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-redis-redis",
+      "type": "sdk",
+      "what": "LangChain's RedisVectorStore writes and searches vectors in Redis",
+      "started_at": "2026-10-21T23:46:06+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "wrote 2 vectors to Redis, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-redis": "0.2.6"
+      },
+      "seconds": 10.4,
+      "finished_at": "2026-10-21T23:46:16+00:00"
+    },
+    {
+      "pair": "langchain-weaviate",
+      "a": "t-gh-langchain-ai-langchain",
+      "b": "t-gh-weaviate-weaviate",
+      "type": "sdk",
+      "what": "LangChain writes vectors to Weaviate and searches them back",
+      "started_at": "2026-10-21T23:45:14+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "wrote 2 vectors to Weaviate, found the right one",
+      "ok": true,
+      "versions": {
+        "langchain-core": "1.6.13",
+        "langchain-weaviate": "0.0.8",
+        "weaviate-client": "4.24.0"
+      },
+      "seconds": 18.9,
+      "finished_at": "2026-10-21T23:45:33+00:00"
+    },
+    {
+      "pair": "langgraph-pgvector",
+      "a": "t-langgraph",
+      "b": "t-pgvector",
+      "type": "native-connector",
+      "what": "A LangGraph graph checkpoints its state to Postgres and reads it back",
+      "started_at": "2026-10-21T23:44:59+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "ran a graph and read its checkpoint back from Postgres",
+      "ok": true,
+      "versions": {
+        "langgraph": "1.2.16",
+        "langgraph-checkpoint-postgres": "3.2.0",
+        "psycopg": "3.3.6"
+      },
+      "seconds": 11.3,
+      "finished_at": "2026-10-21T23:45:10+00:00"
     },
     {
       "pair": "litellm-ollama",
@@ -85,17 +372,17 @@
       "b": "t-gh-ollama-ollama",
       "type": "rest-api",
       "what": "LiteLLM routes a chat completion to a local Ollama model",
-      "started_at": "2026-10-21T23:23:20+00:00",
+      "started_at": "2026-10-21T23:44:17+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
-      "note": "replied: ready.",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: Ready.",
       "ok": true,
       "versions": {
         "litellm": "1.106.2"
       },
-      "seconds": 18.2,
-      "finished_at": "2026-10-21T23:23:38+00:00"
+      "seconds": 22.0,
+      "finished_at": "2026-10-21T23:44:38+00:00"
     },
     {
       "pair": "llamaindex-chroma",
@@ -103,10 +390,10 @@
       "b": "t-gh-chroma-core-chroma",
       "type": "sdk",
       "what": "LlamaIndex indexes documents in Chroma and retrieves them",
-      "started_at": "2026-10-21T23:23:08+00:00",
+      "started_at": "2026-10-21T23:45:03+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
       "note": "indexed 1 document in Chroma, retrieved it",
       "ok": true,
       "versions": {
@@ -114,8 +401,105 @@
         "llama-index-vector-stores-chroma": "0.6.0",
         "chromadb": "1.5.9"
       },
-      "seconds": 23.5,
-      "finished_at": "2026-10-21T23:23:32+00:00"
+      "seconds": 44.1,
+      "finished_at": "2026-10-21T23:45:48+00:00"
+    },
+    {
+      "pair": "llamaindex-docling",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-docling-project-docling",
+      "type": "sdk",
+      "what": "LlamaIndex's DoclingReader converts a document into LlamaIndex documents",
+      "started_at": "2026-10-21T23:43:58+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "converted a document into 1 LlamaIndex document(s)",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-readers-docling": "0.5.0"
+      },
+      "seconds": 119.8,
+      "finished_at": "2026-10-21T23:45:58+00:00"
+    },
+    {
+      "pair": "llamaindex-lancedb",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-lancedb-lancedb",
+      "type": "sdk",
+      "what": "LlamaIndex indexes documents in LanceDB and retrieves them",
+      "started_at": "2026-10-21T23:45:26+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "ok": false,
+      "error": "ModuleNotFoundError: No module named 'pandas'",
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-vector-stores-lancedb": "0.6.0"
+      },
+      "seconds": 20.1,
+      "finished_at": "2026-10-21T23:45:47+00:00"
+    },
+    {
+      "pair": "llamaindex-langchain",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-langchain-ai-langchain",
+      "type": "sdk",
+      "what": "LlamaIndex drives a LangChain LLM through its LangChainLLM wrapper",
+      "started_at": "2026-10-21T23:43:40+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "ok": false,
+      "error": "ModuleNotFoundError: No module named 'langchain.callbacks'",
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-llms-langchain": "0.9.0",
+        "langchain-core": "1.6.13"
+      },
+      "seconds": 21.8,
+      "finished_at": "2026-10-21T23:44:02+00:00"
+    },
+    {
+      "pair": "llamaindex-litellm",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-berriai-litellm",
+      "type": "sdk",
+      "what": "LlamaIndex's LiteLLM LLM completes a prompt through LiteLLM",
+      "started_at": "2026-10-21T23:44:13+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: ready.",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-llms-litellm": "0.8.0"
+      },
+      "seconds": 28.1,
+      "finished_at": "2026-10-21T23:44:41+00:00"
+    },
+    {
+      "pair": "llamaindex-milvus",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-milvus-io-milvus",
+      "type": "sdk",
+      "what": "LlamaIndex indexes documents in Milvus (Lite) and retrieves them",
+      "started_at": "2026-10-21T23:44:10+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "indexed 1 document in Milvus Lite, retrieved it",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-vector-stores-milvus": "1.2.0",
+        "pymilvus": "2.6.17"
+      },
+      "seconds": 29.1,
+      "finished_at": "2026-10-21T23:44:39+00:00"
     },
     {
       "pair": "llamaindex-ollama",
@@ -123,18 +507,18 @@
       "b": "t-gh-ollama-ollama",
       "type": "sdk",
       "what": "LlamaIndex's Ollama LLM completes a prompt on a local Ollama model",
-      "started_at": "2026-10-21T23:23:01+00:00",
+      "started_at": "2026-10-21T23:43:46+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
-      "note": "replied: Ready. Ready to assist you with any questions or tasks you m",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: ready. Ready to assist you with any questions or tasks you m",
       "ok": true,
       "versions": {
         "llama-index-core": "0.14.25",
         "llama-index-llms-ollama": "0.11.0"
       },
-      "seconds": 22.8,
-      "finished_at": "2026-10-21T23:23:24+00:00"
+      "seconds": 23.4,
+      "finished_at": "2026-10-21T23:44:09+00:00"
     },
     {
       "pair": "llamaindex-qdrant",
@@ -142,10 +526,10 @@
       "b": "t-gh-qdrant-qdrant",
       "type": "sdk",
       "what": "LlamaIndex indexes documents in Qdrant and retrieves them",
-      "started_at": "2026-10-21T23:22:53+00:00",
+      "started_at": "2026-10-21T23:43:38+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
       "note": "indexed 1 document, retrieved it",
       "ok": true,
       "versions": {
@@ -153,8 +537,84 @@
         "llama-index-vector-stores-qdrant": "0.10.4",
         "qdrant-client": "1.19.1"
       },
-      "seconds": 23.6,
-      "finished_at": "2026-10-21T23:23:16+00:00"
+      "seconds": 17.9,
+      "finished_at": "2026-10-21T23:43:55+00:00"
+    },
+    {
+      "pair": "llamaindex-redis",
+      "a": "t-gh-run-llama-llama-index",
+      "b": "t-gh-redis-redis",
+      "type": "sdk",
+      "what": "LlamaIndex indexes documents in Redis and retrieves them",
+      "started_at": "2026-10-21T23:43:35+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "indexed 1 document in Redis, retrieved it",
+      "ok": true,
+      "versions": {
+        "llama-index-core": "0.14.25",
+        "llama-index-vector-stores-redis": "0.9.0"
+      },
+      "seconds": 21.1,
+      "finished_at": "2026-10-21T23:43:56+00:00"
+    },
+    {
+      "pair": "mem0-ollama",
+      "a": "t-gh-mem0ai-mem0",
+      "b": "t-gh-ollama-ollama",
+      "type": "sdk",
+      "what": "mem0 stores and searches a memory using Ollama for the LLM and embeddings, Qdrant for vectors",
+      "started_at": "2026-10-21T23:45:41+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "ok": false,
+      "error": "ValueError: Top-level entity parameters frozenset({'user_id'}) are not supported in search(). Use filters={'user_id': '...'} instead.",
+      "versions": {
+        "mem0ai": "2.2.1",
+        "ollama": "0.6.3",
+        "qdrant-client": "1.19.1"
+      },
+      "seconds": 11.7,
+      "finished_at": "2026-10-21T23:45:53+00:00"
+    },
+    {
+      "pair": "onnx-onnxruntime",
+      "a": "t-gh-onnx-onnx",
+      "b": "t-gh-microsoft-onnxruntime",
+      "type": "native-connector",
+      "what": "ONNX Runtime runs a model built with the onnx library",
+      "started_at": "2026-10-21T23:46:02+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "ok": false,
+      "error": "onnxruntime.capi.onnxruntime_pybind11_state.Fail: [ONNXRuntimeError] : 1 : FAIL : /onnxruntime_src/onnxruntime/core/graph/model.cc:256 onnxruntime::Model::Model(onnx::ModelProto&&, const onnxruntime::PathString&, const onnxruntime::IOnnxRuntimeOpSchemaRegistryList*, const onnxruntime::logging::Logger&, const onnxruntime::ModelOptions&) Unsupported model IR version: 14, max supported IR version: 13",
+      "versions": {
+        "onnx": "1.23.2",
+        "onnxruntime": "1.31.0"
+      },
+      "seconds": 5.5,
+      "finished_at": "2026-10-21T23:46:07+00:00"
+    },
+    {
+      "pair": "openai-ollama",
+      "a": "t-gh-openai-openai-python",
+      "b": "t-gh-ollama-ollama",
+      "type": "rest-api",
+      "what": "The OpenAI Python SDK gets a chat completion from Ollama's OpenAI-compatible API",
+      "started_at": "2026-10-21T23:43:44+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: Ready. Ready to assist you with any question you",
+      "ok": true,
+      "versions": {
+        "openai": "3.36.0"
+      },
+      "seconds": 7.9,
+      "finished_at": "2026-10-21T23:43:52+00:00"
     },
     {
       "pair": "psycopg-pgvector",
@@ -162,17 +622,116 @@
       "b": "t-pgvector",
       "type": "native-connector",
       "what": "psycopg stores a pgvector embedding in Postgres and finds its nearest neighbour",
-      "started_at": "2026-10-21T23:22:55+00:00",
+      "started_at": "2026-10-21T23:43:57+00:00",
       "python": "3.12.15",
       "runner": "Linux",
-      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39692928203",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
       "note": "pgvector 0.8.7: nearest-neighbour query returned the right row",
       "ok": true,
       "versions": {
         "psycopg": "3.3.6"
       },
       "seconds": 3.3,
-      "finished_at": "2026-10-21T23:22:58+00:00"
+      "finished_at": "2026-10-21T23:44:00+00:00"
+    },
+    {
+      "pair": "pydanticai-ollama",
+      "a": "t-gh-pydantic-pydantic-ai",
+      "b": "t-gh-ollama-ollama",
+      "type": "rest-api",
+      "what": "A Pydantic AI agent runs on a local Ollama model",
+      "started_at": "2026-10-21T23:43:43+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "replied: I'm ready. Ready to help you with your questions or concerns",
+      "ok": true,
+      "versions": {
+        "pydantic-ai-slim": "2.59.0"
+      },
+      "seconds": 10.9,
+      "finished_at": "2026-10-21T23:43:54+00:00"
+    },
+    {
+      "pair": "sklearn-onnxruntime",
+      "a": "t-gh-scikit-learn-scikit-learn",
+      "b": "t-gh-microsoft-onnxruntime",
+      "type": "data-export",
+      "what": "A scikit-learn model exported to ONNX gives the same predictions in ONNX Runtime",
+      "started_at": "2026-10-21T23:45:12+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "a scikit-learn model exported to ONNX gave identical predictions in ONNX Runtime",
+      "ok": true,
+      "versions": {
+        "scikit-learn": "1.9.1",
+        "skl2onnx": "1.20.0",
+        "onnxruntime": "1.31.0"
+      },
+      "seconds": 13.4,
+      "finished_at": "2026-10-21T23:45:25+00:00"
+    },
+    {
+      "pair": "supervision-ultralytics",
+      "a": "t-gh-roboflow-supervision",
+      "b": "t-gh-ultralytics-ultralytics",
+      "type": "sdk",
+      "what": "Supervision reads Ultralytics YOLO detections",
+      "started_at": "2026-10-21T23:43:36+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "Supervision read 5 Ultralytics detections",
+      "ok": true,
+      "versions": {
+        "ultralytics": "8.4.183",
+        "supervision": "0.31.1",
+        "torch": "2.14.1+cpu",
+        "torchvision": "0.29.1+cpu"
+      },
+      "seconds": 55.7,
+      "finished_at": "2026-10-21T23:44:32+00:00"
+    },
+    {
+      "pair": "transformers-pytorch",
+      "a": "t-gh-huggingface-transformers",
+      "b": "t-gh-pytorch-pytorch",
+      "type": "native-connector",
+      "what": "A Transformers pipeline classifies text with a small model on PyTorch",
+      "started_at": "2026-10-21T23:45:34+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "classified a sentence on PyTorch: POSITIVE",
+      "ok": true,
+      "versions": {
+        "transformers": "5.20.2",
+        "torch": "2.14.1+cpu",
+        "torchvision": "0.29.1+cpu"
+      },
+      "seconds": 36.7,
+      "finished_at": "2026-10-21T23:46:11+00:00"
+    },
+    {
+      "pair": "ultralytics-pytorch",
+      "a": "t-gh-ultralytics-ultralytics",
+      "b": "t-gh-pytorch-pytorch",
+      "type": "native-connector",
+      "what": "Ultralytics YOLO detects objects in a sample image on PyTorch",
+      "started_at": "2026-10-21T23:44:57+00:00",
+      "python": "3.12.15",
+      "runner": "Linux",
+      "run_url": "https://github.com/dataappsagency/circuit-checks/actions/runs/39695142359",
+      "note": "detected 5 objects on PyTorch (CPU)",
+      "ok": true,
+      "versions": {
+        "ultralytics": "8.4.183",
+        "torch": "2.14.1+cpu",
+        "torchvision": "0.29.1+cpu"
+      },
+      "seconds": 47.0,
+      "finished_at": "2026-10-21T23:45:44+00:00"
     }
   ]
 }
