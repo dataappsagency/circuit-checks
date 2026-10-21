@@ -1,0 +1,18 @@
+{
+  "_about": "Each pair is a real integration run on a fresh GitHub runner: install both, make one real call through the pair, record the versions and the result. circuit reads results/latest.json and marks a pair that ran as tier 2 for that connection; a failure is a dated negative fact.",
+  "pairs": [
+    { "id": "litellm-ollama", "a": "t-gh-berriai-litellm", "b": "t-gh-ollama-ollama", "type": "rest-api", "packages": ["litellm"], "needs": ["ollama"], "what": "LiteLLM routes a chat completion to a local Ollama model" },
+    { "id": "langchain-ollama", "a": "t-gh-langchain-ai-langchain", "b": "t-gh-ollama-ollama", "type": "sdk", "packages": ["langchain-core", "langchain-ollama"], "needs": ["ollama"], "what": "LangChain's ChatOllama gets an answer from a local Ollama model" },
+    { "id": "llamaindex-ollama", "a": "t-gh-run-llama-llama-index", "b": "t-gh-ollama-ollama", "type": "sdk", "packages": ["llama-index-core", "llama-index-llms-ollama"], "needs": ["ollama"], "what": "LlamaIndex's Ollama LLM completes a prompt on a local Ollama model" },
+    { "id": "langchain-qdrant", "a": "t-gh-langchain-ai-langchain", "b": "t-gh-qdrant-qdrant", "type": "sdk", "packages": ["langchain-core", "langchain-qdrant", "qdrant-client"], "needs": ["qdrant"], "what": "LangChain writes vectors to Qdrant and searches them back" },
+    { "id": "llamaindex-qdrant", "a": "t-gh-run-llama-llama-index", "b": "t-gh-qdrant-qdrant", "type": "sdk", "packages": ["llama-index-core", "llama-index-vector-stores-qdrant", "qdrant-client"], "needs": ["qdrant"], "what": "LlamaIndex indexes documents in Qdrant and retrieves them" },
+    { "id": "haystack-qdrant", "a": "t-gh-deepset-ai-haystack", "b": "t-gh-qdrant-qdrant", "type": "sdk", "packages": ["haystack-ai", "qdrant-haystack"], "needs": ["qdrant"], "what": "Haystack writes documents to a Qdrant document store and reads them back" },
+    { "id": "llamaindex-chroma", "a": "t-gh-run-llama-llama-index", "b": "t-gh-chroma-core-chroma", "type": "sdk", "packages": ["llama-index-core", "llama-index-vector-stores-chroma", "chromadb"], "needs": [], "what": "LlamaIndex indexes documents in Chroma and retrieves them" },
+    { "id": "psycopg-pgvector", "a": "t-gh-psycopg-psycopg", "b": "t-pgvector", "type": "native-connector", "packages": ["psycopg[binary]"], "needs": ["postgres"], "what": "psycopg stores a pgvector embedding in Postgres and finds its nearest neighbour" },
+    { "id": "langchain-pgvector", "a": "t-gh-langchain-ai-langchain", "b": "t-pgvector", "type": "sdk", "packages": ["langchain-core", "langchain-postgres", "psycopg[binary]"], "needs": ["postgres"], "what": "LangChain's PGVector store writes and searches vectors in Postgres" }
+  ],
+  "not_runnable_yet": [
+    { "id": "litellm-vllm", "why": "vLLM needs a GPU; GitHub's free runners have none" },
+    { "id": "*-openai, *-pinecone, *-anthropic", "why": "needs a paid account; comes later with circuit-owned, spend-capped keys" }
+  ]
+}

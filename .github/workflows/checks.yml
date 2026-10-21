@@ -1,0 +1,82 @@
+# Weekly, on demand, and whenever a check changes: run every pair on a fresh runner and publish
+# results/latest.json, which circuit reads. A failing pair is a result, never a red build.
+name: checks
+on:
+  schedule: [{ cron: "0 5 * * 1" }]
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ["pairs/**", "pairs.json", "run.py", ".github/workflows/checks.yml"]
+permissions:
+  contents: write
+concurrency: { group: checks, cancel-in-progress: false }
+
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      pairs: ${{ steps.p.outputs.pairs }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        run: echo "pairs=$(jq -c '[.pairs[] | {id, needs}]' pairs.json)" >> "$GITHUB_OUTPUT"
+
+  check:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        pair: ${{ fromJSON(needs.list.outputs.pairs) }}
+    services:
+      qdrant:
+        image: qdrant/qdrant:latest
+        ports: ["6333:6333"]
+      postgres:
+        image: pgvector/pgvector:pg16
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+      ollama:
+        image: ollama/ollama:latest
+        ports: ["11434:11434"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Pull the small model
+        if: contains(matrix.pair.needs, 'ollama')
+        run: |
+          for i in $(seq 1 30); do curl -sf http://localhost:11434/api/tags >/dev/null && break; sleep 2; done
+          curl -sf http://localhost:11434/api/pull -d '{"name":"qwen2.5:0.5b","stream":false}' > /dev/null
+      - name: Wait for Qdrant
+        if: contains(matrix.pair.needs, 'qdrant')
+        run: for i in $(seq 1 30); do curl -sf http://localhost:6333/readyz && break; sleep 2; done
+      - name: Run the pair
+        run: python run.py "${{ matrix.pair.id }}"
+      - uses: actions/upload-artifact@v4
+        with: { name: "run-${{ matrix.pair.id }}", path: "results/runs/${{ matrix.pair.id }}.json" }
+
+  publish:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { pattern: "run-*", path: incoming, merge-multiple: true }
+      - name: Merge into results/latest.json and the dated history
+        run: |
+          mkdir -p results/history
+          day=$(date -u +%F)
+          jq -s '{generated_at: (now | todate), runs: (sort_by(.pair))}' incoming/*.json > results/latest.json
+          cp results/latest.json "results/history/$day.json"
+          jq -r '.runs[] | "\(if .ok then "ran " else "FAILED" end)  \(.pair)  \(.versions | to_entries | map("\(.key) \(.value)") | join(", "))"' results/latest.json
+      - name: Commit the results
+        run: |
+          git config user.name "circuit-checks"
+          git config user.email "checks@usecircuit.app"
+          git add results/latest.json results/history
+          git commit -m "results $(date -u +%F)" || exit 0
+          git push
