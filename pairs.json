@@ -220,7 +220,7 @@
    "needs": [
     "ollama"
    ],
-   "what": "Haystack's OllamaGenerator answers a prompt"
+   "what": "Haystack's OllamaChatGenerator answers a prompt"
   },
   {
    "id": "mem0-ollama",
@@ -391,7 +391,8 @@
    "b": "t-gh-docling-project-docling",
    "type": "sdk",
    "packages": [
-    "langchain-docling"
+    "langchain-docling",
+    "beautifulsoup4"
    ],
    "needs": [],
    "what": "LangChain's DoclingLoader converts a document into LangChain documents"
