@@ -24,7 +24,7 @@ jobs:
   check:
     needs: list
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     strategy:
       fail-fast: false
       matrix:
@@ -41,6 +41,17 @@ jobs:
       ollama:
         image: ollama/ollama:latest
         ports: ["11434:11434"]
+      redis:
+        image: redis/redis-stack-server:latest
+        ports: ["6379:6379"]
+      weaviate:
+        image: cr.weaviate.io/semitechnologies/weaviate:latest
+        ports: ["8080:8080", "50051:50051"]
+        env:
+          AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+          PERSISTENCE_DATA_PATH: /var/lib/weaviate
+          DEFAULT_VECTORIZER_MODULE: none
+          CLUSTER_HOSTNAME: node1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -50,9 +61,15 @@ jobs:
         run: |
           for i in $(seq 1 30); do curl -sf http://localhost:11434/api/tags >/dev/null && break; sleep 2; done
           curl -sf http://localhost:11434/api/pull -d '{"name":"qwen2.5:0.5b","stream":false}' > /dev/null
+      - name: Pull the embedding model
+        if: contains(matrix.pair.needs, 'ollama-embed')
+        run: curl -sf http://localhost:11434/api/pull -d '{"name":"nomic-embed-text","stream":false}' > /dev/null
       - name: Wait for Qdrant
         if: contains(matrix.pair.needs, 'qdrant')
         run: for i in $(seq 1 30); do curl -sf http://localhost:6333/readyz && break; sleep 2; done
+      - name: Wait for Weaviate
+        if: contains(matrix.pair.needs, 'weaviate')
+        run: for i in $(seq 1 45); do curl -sf http://localhost:8080/v1/.well-known/ready && break; sleep 2; done
       - name: Run the pair
         run: python run.py "${{ matrix.pair.id }}"
       - uses: actions/upload-artifact@v4

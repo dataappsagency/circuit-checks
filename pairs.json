@@ -1,18 +1,553 @@
 {
-  "_about": "Each pair is a real integration run on a fresh GitHub runner: install both, make one real call through the pair, record the versions and the result. circuit reads results/latest.json and marks a pair that ran as tier 2 for that connection; a failure is a dated negative fact.",
-  "pairs": [
-    { "id": "litellm-ollama", "a": "t-gh-berriai-litellm", "b": "t-gh-ollama-ollama", "type": "rest-api", "packages": ["litellm"], "needs": ["ollama"], "what": "LiteLLM routes a chat completion to a local Ollama model" },
-    { "id": "langchain-ollama", "a": "t-gh-langchain-ai-langchain", "b": "t-gh-ollama-ollama", "type": "sdk", "packages": ["langchain-core", "langchain-ollama"], "needs": ["ollama"], "what": "LangChain's ChatOllama gets an answer from a local Ollama model" },
-    { "id": "llamaindex-ollama", "a": "t-gh-run-llama-llama-index", "b": "t-gh-ollama-ollama", "type": "sdk", "packages": ["llama-index-core", "llama-index-llms-ollama"], "needs": ["ollama"], "what": "LlamaIndex's Ollama LLM completes a prompt on a local Ollama model" },
-    { "id": "langchain-qdrant", "a": "t-gh-langchain-ai-langchain", "b": "t-gh-qdrant-qdrant", "type": "sdk", "packages": ["langchain-core", "langchain-qdrant", "qdrant-client"], "needs": ["qdrant"], "what": "LangChain writes vectors to Qdrant and searches them back" },
-    { "id": "llamaindex-qdrant", "a": "t-gh-run-llama-llama-index", "b": "t-gh-qdrant-qdrant", "type": "sdk", "packages": ["llama-index-core", "llama-index-vector-stores-qdrant", "qdrant-client"], "needs": ["qdrant"], "what": "LlamaIndex indexes documents in Qdrant and retrieves them" },
-    { "id": "haystack-qdrant", "a": "t-gh-deepset-ai-haystack", "b": "t-gh-qdrant-qdrant", "type": "sdk", "packages": ["haystack-ai", "qdrant-haystack"], "needs": ["qdrant"], "what": "Haystack writes documents to a Qdrant document store and reads them back" },
-    { "id": "llamaindex-chroma", "a": "t-gh-run-llama-llama-index", "b": "t-gh-chroma-core-chroma", "type": "sdk", "packages": ["llama-index-core", "llama-index-vector-stores-chroma", "chromadb"], "needs": [], "what": "LlamaIndex indexes documents in Chroma and retrieves them" },
-    { "id": "psycopg-pgvector", "a": "t-gh-psycopg-psycopg", "b": "t-pgvector", "type": "native-connector", "packages": ["psycopg[binary]"], "needs": ["postgres"], "what": "psycopg stores a pgvector embedding in Postgres and finds its nearest neighbour" },
-    { "id": "langchain-pgvector", "a": "t-gh-langchain-ai-langchain", "b": "t-pgvector", "type": "sdk", "packages": ["langchain-core", "langchain-postgres", "psycopg[binary]"], "needs": ["postgres"], "what": "LangChain's PGVector store writes and searches vectors in Postgres" }
-  ],
-  "not_runnable_yet": [
-    { "id": "litellm-vllm", "why": "vLLM needs a GPU; GitHub's free runners have none" },
-    { "id": "*-openai, *-pinecone, *-anthropic", "why": "needs a paid account; comes later with circuit-owned, spend-capped keys" }
-  ]
+ "_about": "Each pair is a real integration run on a fresh GitHub runner: install both, make one real call through the pair, record the versions and the result. circuit reads results/latest.json and marks a pair that ran as tier 2 for that connection; a failure is a dated negative fact.",
+ "pairs": [
+  {
+   "id": "litellm-ollama",
+   "a": "t-gh-berriai-litellm",
+   "b": "t-gh-ollama-ollama",
+   "type": "rest-api",
+   "packages": [
+    "litellm"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "LiteLLM routes a chat completion to a local Ollama model"
+  },
+  {
+   "id": "langchain-ollama",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-ollama-ollama",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-ollama"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "LangChain's ChatOllama gets an answer from a local Ollama model"
+  },
+  {
+   "id": "llamaindex-ollama",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-ollama-ollama",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-llms-ollama"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "LlamaIndex's Ollama LLM completes a prompt on a local Ollama model"
+  },
+  {
+   "id": "langchain-qdrant",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-qdrant-qdrant",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-qdrant",
+    "qdrant-client"
+   ],
+   "needs": [
+    "qdrant"
+   ],
+   "what": "LangChain writes vectors to Qdrant and searches them back"
+  },
+  {
+   "id": "llamaindex-qdrant",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-qdrant-qdrant",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-vector-stores-qdrant",
+    "qdrant-client"
+   ],
+   "needs": [
+    "qdrant"
+   ],
+   "what": "LlamaIndex indexes documents in Qdrant and retrieves them"
+  },
+  {
+   "id": "haystack-qdrant",
+   "a": "t-gh-deepset-ai-haystack",
+   "b": "t-gh-qdrant-qdrant",
+   "type": "sdk",
+   "packages": [
+    "haystack-ai",
+    "qdrant-haystack"
+   ],
+   "needs": [
+    "qdrant"
+   ],
+   "what": "Haystack writes documents to a Qdrant document store and reads them back"
+  },
+  {
+   "id": "llamaindex-chroma",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-chroma-core-chroma",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-vector-stores-chroma",
+    "chromadb"
+   ],
+   "needs": [],
+   "what": "LlamaIndex indexes documents in Chroma and retrieves them"
+  },
+  {
+   "id": "psycopg-pgvector",
+   "a": "t-gh-psycopg-psycopg",
+   "b": "t-pgvector",
+   "type": "native-connector",
+   "packages": [
+    "psycopg[binary]"
+   ],
+   "needs": [
+    "postgres"
+   ],
+   "what": "psycopg stores a pgvector embedding in Postgres and finds its nearest neighbour"
+  },
+  {
+   "id": "langchain-pgvector",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-pgvector",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-postgres",
+    "psycopg[binary]"
+   ],
+   "needs": [
+    "postgres"
+   ],
+   "what": "LangChain's PGVector store writes and searches vectors in Postgres"
+  },
+  {
+   "id": "openai-ollama",
+   "a": "t-gh-openai-openai-python",
+   "b": "t-gh-ollama-ollama",
+   "type": "rest-api",
+   "packages": [
+    "openai"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "The OpenAI Python SDK gets a chat completion from Ollama's OpenAI-compatible API"
+  },
+  {
+   "id": "langchain-litellm",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-berriai-litellm",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-litellm"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "LangChain's ChatLiteLLM routes a prompt through LiteLLM to a local model"
+  },
+  {
+   "id": "llamaindex-litellm",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-berriai-litellm",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-llms-litellm"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "LlamaIndex's LiteLLM LLM completes a prompt through LiteLLM"
+  },
+  {
+   "id": "pydanticai-ollama",
+   "a": "t-gh-pydantic-pydantic-ai",
+   "b": "t-gh-ollama-ollama",
+   "type": "rest-api",
+   "packages": [
+    "pydantic-ai-slim[openai]"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "A Pydantic AI agent runs on a local Ollama model"
+  },
+  {
+   "id": "instructor-ollama",
+   "a": "t-gh-567-labs-instructor",
+   "b": "t-gh-ollama-ollama",
+   "type": "rest-api",
+   "packages": [
+    "instructor",
+    "openai"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "Instructor gets a validated structured object from a local Ollama model"
+  },
+  {
+   "id": "crewai-ollama",
+   "a": "t-gh-crewaiinc-crewai",
+   "b": "t-gh-ollama-ollama",
+   "type": "sdk",
+   "packages": [
+    "crewai"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "A one-agent CrewAI crew completes a task on a local Ollama model"
+  },
+  {
+   "id": "haystack-ollama",
+   "a": "t-gh-deepset-ai-haystack",
+   "b": "t-gh-ollama-ollama",
+   "type": "sdk",
+   "packages": [
+    "haystack-ai",
+    "ollama-haystack"
+   ],
+   "needs": [
+    "ollama"
+   ],
+   "what": "Haystack's OllamaGenerator answers a prompt"
+  },
+  {
+   "id": "mem0-ollama",
+   "a": "t-gh-mem0ai-mem0",
+   "b": "t-gh-ollama-ollama",
+   "type": "sdk",
+   "packages": [
+    "mem0ai",
+    "ollama",
+    "qdrant-client"
+   ],
+   "needs": [
+    "ollama",
+    "ollama-embed",
+    "qdrant"
+   ],
+   "what": "mem0 stores and searches a memory using Ollama for the LLM and embeddings, Qdrant for vectors"
+  },
+  {
+   "id": "langchain-chroma",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-chroma-core-chroma",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-chroma"
+   ],
+   "needs": [],
+   "what": "LangChain writes vectors to Chroma and searches them back"
+  },
+  {
+   "id": "haystack-chroma",
+   "a": "t-gh-deepset-ai-haystack",
+   "b": "t-gh-chroma-core-chroma",
+   "type": "sdk",
+   "packages": [
+    "haystack-ai",
+    "chroma-haystack"
+   ],
+   "needs": [],
+   "what": "Haystack writes documents to a Chroma document store and counts them back"
+  },
+  {
+   "id": "langchain-redis",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-redis-redis",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-redis"
+   ],
+   "needs": [
+    "redis"
+   ],
+   "what": "LangChain's RedisVectorStore writes and searches vectors in Redis"
+  },
+  {
+   "id": "llamaindex-redis",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-redis-redis",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-vector-stores-redis"
+   ],
+   "needs": [
+    "redis"
+   ],
+   "what": "LlamaIndex indexes documents in Redis and retrieves them"
+  },
+  {
+   "id": "langchain-milvus",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-milvus-io-milvus",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-milvus",
+    "pymilvus[milvus_lite]"
+   ],
+   "needs": [],
+   "what": "LangChain writes vectors to Milvus (Lite) and searches them back"
+  },
+  {
+   "id": "llamaindex-milvus",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-milvus-io-milvus",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-vector-stores-milvus",
+    "pymilvus[milvus_lite]"
+   ],
+   "needs": [],
+   "what": "LlamaIndex indexes documents in Milvus (Lite) and retrieves them"
+  },
+  {
+   "id": "langchain-lancedb",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-lancedb-lancedb",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-community",
+    "lancedb"
+   ],
+   "needs": [],
+   "what": "LangChain writes vectors to LanceDB and searches them back"
+  },
+  {
+   "id": "llamaindex-lancedb",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-lancedb-lancedb",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-vector-stores-lancedb"
+   ],
+   "needs": [],
+   "what": "LlamaIndex indexes documents in LanceDB and retrieves them"
+  },
+  {
+   "id": "langchain-weaviate",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-weaviate-weaviate",
+   "type": "sdk",
+   "packages": [
+    "langchain-core",
+    "langchain-weaviate",
+    "weaviate-client"
+   ],
+   "needs": [
+    "weaviate"
+   ],
+   "what": "LangChain writes vectors to Weaviate and searches them back"
+  },
+  {
+   "id": "langgraph-pgvector",
+   "a": "t-langgraph",
+   "b": "t-pgvector",
+   "type": "native-connector",
+   "packages": [
+    "langgraph",
+    "langgraph-checkpoint-postgres",
+    "psycopg[binary]"
+   ],
+   "needs": [
+    "postgres"
+   ],
+   "what": "A LangGraph graph checkpoints its state to Postgres and reads it back"
+  },
+  {
+   "id": "llamaindex-langchain",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-langchain-ai-langchain",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-llms-langchain",
+    "langchain-core"
+   ],
+   "needs": [],
+   "what": "LlamaIndex drives a LangChain LLM through its LangChainLLM wrapper"
+  },
+  {
+   "id": "langchain-docling",
+   "a": "t-gh-langchain-ai-langchain",
+   "b": "t-gh-docling-project-docling",
+   "type": "sdk",
+   "packages": [
+    "langchain-docling"
+   ],
+   "needs": [],
+   "what": "LangChain's DoclingLoader converts a document into LangChain documents"
+  },
+  {
+   "id": "llamaindex-docling",
+   "a": "t-gh-run-llama-llama-index",
+   "b": "t-gh-docling-project-docling",
+   "type": "sdk",
+   "packages": [
+    "llama-index-core",
+    "llama-index-readers-docling"
+   ],
+   "needs": [],
+   "what": "LlamaIndex's DoclingReader converts a document into LlamaIndex documents"
+  },
+  {
+   "id": "keras-pytorch",
+   "a": "t-gh-keras-team-keras",
+   "b": "t-gh-pytorch-pytorch",
+   "type": "native-connector",
+   "pre": [
+    [
+     "torch",
+     "torchvision",
+     "--index-url",
+     "https://download.pytorch.org/whl/cpu"
+    ]
+   ],
+   "packages": [
+    "keras"
+   ],
+   "env": {
+    "KERAS_BACKEND": "torch"
+   },
+   "needs": [],
+   "what": "Keras trains a small model on its PyTorch backend"
+  },
+  {
+   "id": "keras-tensorflow",
+   "a": "t-gh-keras-team-keras",
+   "b": "t-gh-tensorflow-tensorflow",
+   "type": "native-connector",
+   "packages": [
+    "tensorflow"
+   ],
+   "env": {
+    "KERAS_BACKEND": "tensorflow"
+   },
+   "needs": [],
+   "what": "Keras trains a small model on its TensorFlow backend"
+  },
+  {
+   "id": "transformers-pytorch",
+   "a": "t-gh-huggingface-transformers",
+   "b": "t-gh-pytorch-pytorch",
+   "type": "native-connector",
+   "pre": [
+    [
+     "torch",
+     "torchvision",
+     "--index-url",
+     "https://download.pytorch.org/whl/cpu"
+    ]
+   ],
+   "packages": [
+    "transformers"
+   ],
+   "needs": [],
+   "what": "A Transformers pipeline classifies text with a small model on PyTorch"
+  },
+  {
+   "id": "ultralytics-pytorch",
+   "a": "t-gh-ultralytics-ultralytics",
+   "b": "t-gh-pytorch-pytorch",
+   "type": "native-connector",
+   "pre": [
+    [
+     "torch",
+     "torchvision",
+     "--index-url",
+     "https://download.pytorch.org/whl/cpu"
+    ]
+   ],
+   "packages": [
+    "ultralytics"
+   ],
+   "needs": [],
+   "what": "Ultralytics YOLO detects objects in a sample image on PyTorch"
+  },
+  {
+   "id": "supervision-ultralytics",
+   "a": "t-gh-roboflow-supervision",
+   "b": "t-gh-ultralytics-ultralytics",
+   "type": "sdk",
+   "pre": [
+    [
+     "torch",
+     "torchvision",
+     "--index-url",
+     "https://download.pytorch.org/whl/cpu"
+    ]
+   ],
+   "packages": [
+    "ultralytics",
+    "supervision"
+   ],
+   "needs": [],
+   "what": "Supervision reads Ultralytics YOLO detections"
+  },
+  {
+   "id": "onnx-onnxruntime",
+   "a": "t-gh-onnx-onnx",
+   "b": "t-gh-microsoft-onnxruntime",
+   "type": "native-connector",
+   "packages": [
+    "onnx",
+    "onnxruntime"
+   ],
+   "needs": [],
+   "what": "ONNX Runtime runs a model built with the onnx library"
+  },
+  {
+   "id": "sklearn-onnxruntime",
+   "a": "t-gh-scikit-learn-scikit-learn",
+   "b": "t-gh-microsoft-onnxruntime",
+   "type": "data-export",
+   "packages": [
+    "scikit-learn",
+    "skl2onnx",
+    "onnxruntime"
+   ],
+   "needs": [],
+   "what": "A scikit-learn model exported to ONNX gives the same predictions in ONNX Runtime"
+  },
+  {
+   "id": "langchain-mcp",
+   "a": "t-gh-langchain-ai-langchain-mcp-adapters",
+   "b": "t-gh-modelcontextprotocol-python-sdk",
+   "type": "mcp-server",
+   "packages": [
+    "langchain-mcp-adapters",
+    "mcp"
+   ],
+   "needs": [],
+   "what": "LangChain's MCP adapters load and call a tool from an MCP server built with the official Python SDK"
+  }
+ ],
+ "not_runnable_yet": [
+  {
+   "id": "litellm-vllm",
+   "why": "vLLM needs a GPU; GitHub's free runners have none"
+  },
+  {
+   "id": "*-openai, *-pinecone, *-anthropic",
+   "why": "needs a paid account; comes later with circuit-owned, spend-capped keys"
+  }
+ ]
 }

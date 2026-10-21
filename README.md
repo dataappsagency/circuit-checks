@@ -18,6 +18,8 @@ that has both tools.
 Runs weekly (Mondays, 05:00 UTC), on demand, and whenever a check changes. Everything here is
 public on purpose: anyone can read the code and the logs behind a claim.
 
+38 pairs at present, chosen from circuit's graph: the evidenced connections between the most-used AI tools that can run on a CPU runner without an account.
+
 Not runnable yet: pairs that need a GPU (vLLM) or a paid account (OpenAI, Pinecone, Anthropic).
 Those come later with circuit-owned keys that have hard spend caps.
 

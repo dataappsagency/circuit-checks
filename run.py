@@ -17,7 +17,11 @@ result = {"pair": pid, "a": pair["a"], "b": pair["b"], "type": pair["type"], "wh
           "python": platform.python_version(), "runner": os.environ.get("RUNNER_OS", "local"),
           "run_url": f"{os.environ.get('GITHUB_SERVER_URL', '')}/{os.environ.get('GITHUB_REPOSITORY', '')}/actions/runs/{os.environ.get('GITHUB_RUN_ID', '')}" if os.environ.get("GITHUB_RUN_ID") else None}
 try:
-    subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "--disable-pip-version-check", *pair["packages"]], check=True, timeout=900)
+    os.environ.update(pair.get("env", {}))
+    pip = [sys.executable, "-m", "pip", "install", "--quiet", "--disable-pip-version-check"]
+    for pre in pair.get("pre", []):   # e.g. CPU-only PyTorch, before anything pulls the GPU build
+        subprocess.run([*pip, *pre], check=True, timeout=900)
+    subprocess.run([*pip, *pair["packages"]], check=True, timeout=900)
     spec = importlib.util.spec_from_file_location("check", f"pairs/{pid}.py")
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     result["note"] = str(mod.check())[:300]
@@ -26,7 +30,7 @@ except Exception as e:  # the failure is the finding
     result["ok"] = False
     result["error"] = "".join(traceback.format_exception_only(type(e), e)).strip()[-1500:]
 versions = {}
-for p in pair["packages"]:
+for p in [*pair["packages"], *[x for pre in pair.get("pre", []) for x in pre if not x.startswith("-") and not x.startswith("http")]]:
     name = p.split("[")[0]
     try: versions[name] = version(name)
     except PackageNotFoundError: versions[name] = None
