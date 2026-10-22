@@ -24,4 +24,12 @@ Not runnable yet: pairs that need a GPU (vLLM) or a paid account (OpenAI, Pineco
 Those come later with circuit-owned keys that have hard spend caps.
 
 To add a pair: an entry in `pairs.json` and a `pairs/<id>.py` with a `check()` that raises on
-failure. Keep it to one real call — this proves the connection, not the tool.
+failure. Keep it to one real call — this proves the connection, not the tool. The rules, and how
+pull requests are reviewed, are in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licence
+
+- **Code** — everything outside `results/`: [Apache License 2.0](LICENSE).
+- **Results** — `results/latest.json` and `results/history/`: [CC BY 4.0](results/LICENSE).
+  Use them for anything, commercial included, and credit circuit:
+  *Source: circuit-checks by circuit — https://www.usecircuit.app (CC BY 4.0)*.
